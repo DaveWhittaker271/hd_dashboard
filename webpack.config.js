@@ -6,6 +6,11 @@ module.exports = {
     mode: 'development',
     entry: './src/main.js',
     watch: true,
+    resolve: {
+        alias: {
+            vue$: path.resolve(__dirname, 'node_modules/vue/dist/vue.runtime.esm.js')
+        }
+    },
     module: {
         rules: [
             {
