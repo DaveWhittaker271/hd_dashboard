@@ -2,14 +2,16 @@
 const path = require("path");
 const {VueLoaderPlugin} = require('vue-loader')
 
+const Dotenv = require('dotenv-webpack');
+
 module.exports = {
     mode: 'development',
-    entry: './src/main.js',
+    entry: './src/js/main.js',
     watch: true,
     resolve: {
         alias: {
             vue$: path.resolve(__dirname, 'node_modules/vue/dist/vue.runtime.esm.js')
-        }
+        },
     },
     module: {
         rules: [
@@ -17,8 +19,6 @@ module.exports = {
                 test: /\.vue$/,
                 loader: 'vue-loader'
             },
-            // this will apply to both plain `.js` files
-            // AND `<script>` blocks in `.vue` files
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
@@ -29,8 +29,6 @@ module.exports = {
                     ]
                 }
             },
-            // this will apply to both plain `.css` files
-            // AND `<style>` blocks in `.vue` files
             {
                 test: /\.css$/,
                 use: [
@@ -58,15 +56,13 @@ module.exports = {
             }
         ]
     },
-    // Where to compile the bundle
-    // By default the output directory is `dist`
     output: {
         path: path.join(__dirname, "dist"),
         filename: "bundle.js",
         publicPath: '/dist/'
     },
     plugins: [
-        // make sure to include the plugin for the magic
-        new VueLoaderPlugin()
+        new Dotenv(),
+        new VueLoaderPlugin(),
     ]
 }

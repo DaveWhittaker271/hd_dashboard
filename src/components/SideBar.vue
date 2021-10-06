@@ -1,33 +1,29 @@
 <template>
   <b-nav vertical>
     <b-nav-item active>
-      <b-icon icon="camera" font-scale="1" />
+      <b-icon icon="camera" />
     </b-nav-item>
     <b-nav-item>
-      <b-icon icon="asterisk" font-scale="1" />
+      <b-icon icon="asterisk" />
     </b-nav-item>
     <b-nav-item>
-      <b-icon icon="award-fill" font-scale="1" />
+      <b-icon icon="award-fill"  />
     </b-nav-item>
     <b-nav-item disabled>
-      <b-icon icon="bag-check" font-scale="1" />
+      <b-icon icon="bag-check" />
     </b-nav-item>
     <b-nav-item>
-      <b-icon icon="bar-chart-fill" font-scale="1" />
+      <b-icon icon="bar-chart-fill" />
     </b-nav-item>
     <b-nav-item>
-      <b-icon icon="gear-fill" font-scale="1" />
+      <b-icon icon="gear-fill" />
     </b-nav-item>
   </b-nav>
 </template>
 <script>
+
 export default {
   name: 'TodoItem',
-  props: {
-    index: Number,
-    text: String,
-    checked: Boolean,
-  },
 }
 </script>
 <style lang="less" scoped>

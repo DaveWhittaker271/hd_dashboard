@@ -4,19 +4,31 @@
     <NavBar/>
     <div id="main">
       <SideBar/>
+      <CardContainer class="container-fluid">
+        <Card title="Open Pull Requests">
+          <OpenPullRequestsCardData />
+        </Card>
+      </CardContainer>
     </div>
   </div>
 </template>
 
 <script>
-// My components
+import styled from 'vue-styled-components';
+
 import SvgComponent from '../src/components/SvgComponent.vue'
 import SideBar from '../src/components/SideBar.vue'
 import NavBar from '../src/components/NavBar.vue'
+import Card from '../src/components/Card.vue'
+import OpenPullRequestsCardData from './components/OpenPullRequestsCardData.vue'
+
+const CardContainer = styled.div`
+  padding: 25px;
+`;
 
 export default {
   name: 'App',
-  components: {NavBar, SvgComponent, SideBar},
+  components: {NavBar, SvgComponent, SideBar, Card, CardContainer, OpenPullRequestsCardData},
   data() {
     return {}
   },
@@ -25,24 +37,6 @@ export default {
   },
   methods: {
     fetchData() {
-      this.responseAvailable = false;
-      fetch("https://reqres.in/api/users?page=2", {
-        "method": "GET",
-        "headers": {}
-      })
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          console.error("Server returned " + response.status + " : " + response.statusText);
-        }
-      })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(err => {
-        console.error(err);
-      });
     }
   }
 }
