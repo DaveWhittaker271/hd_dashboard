@@ -5,6 +5,7 @@
     <div id="main">
       <SideBar/>
       <CardContainer class="container-fluid">
+        <Header>GitHub</Header>
         <Card title="Open Pull Requests">
           <OpenPullRequestsCardData />
         </Card>
@@ -30,9 +31,16 @@ const CardContainer = styled.div`
   padding: 25px;
 `;
 
+const Header = styled.h4`
+    margin-left: 5px;
+    margin-bottom: 20px;
+`;
+
 export default {
   name: 'App',
-  components: {NavBar, SvgComponent, SideBar, Card, CardContainer, OpenPullRequestsCardData, OutstandingReviewsCardData},
+  components: {
+    NavBar, SvgComponent, SideBar, Card, CardContainer, OpenPullRequestsCardData, OutstandingReviewsCardData, Header
+  },
   data() {
     return {}
   },

@@ -39,7 +39,7 @@ stack
 
  .graph-ql inspector action https://graphql-inspector.com/docs/products/action
 
-
+    https://jbaysolutions.github.io/vue-grid-layout/
 
       fetch("https://reqres.in/api/users?page=2", {
         "method": "GET",
