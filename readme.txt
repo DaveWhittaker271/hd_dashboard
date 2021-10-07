@@ -21,10 +21,9 @@ stack
 	. vue-loader  webpack module for compiling single component files
 	. less-loader webpack module for preprocessed styles
 	. style-transform-loader webpack module for importing less variables files on every component
- - bootstrap-vue/bootstrap4 for styles 
- - AWS dynamodb for data storage
-    . noSQL schemaless databaseo
- - AWS appsync for graphql endpoint
+ - bootstrap-vue/bootstrap4 for styles
+ - libraries:
+  - tiptap for WYSIWYG
  
  
  todo:

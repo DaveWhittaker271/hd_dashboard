@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-icon icon="gear-fill" v-b-toggle.collapse-settings />
-    <b-collapse id="collapse-settings">
+    <b-icon icon="gear-fill" v-b-toggle.collapse-filter1 />
+    <b-collapse id="collapse-filter1">
       <b-card></b-card>
     </b-collapse>
   </div>

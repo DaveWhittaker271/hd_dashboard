@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import apollo from './apollo'
+import apollo from './apollo/apollo'
 import './bootstrap'
 
 import App from '../App.vue'

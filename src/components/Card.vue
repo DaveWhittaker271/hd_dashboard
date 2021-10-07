@@ -1,5 +1,5 @@
 <template>
-  <b-card class="mb-2 col-md-4" bg-variant="light" :header="title" header-html="">
+  <b-card class="mb-2 w-100 h-100" bg-variant="light" :header="title" header-html="">
     <CardFilterArea/>
     <slot/>
   </b-card>
@@ -26,8 +26,6 @@ export default {
 
   .card-body {
     padding: 0;
-    min-height: 200px;
-    overflow-y: auto;
 
     th {
       font-weight: normal;
