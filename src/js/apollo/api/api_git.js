@@ -12,6 +12,13 @@ export default new ApolloClient({
   link          : githubLink,
   cache         : new InMemoryCache({addTypename: true}),
   defaultOptions: {
-    watchQuery: {fetchPolicy: "cache-and-network"}
-  }
+    'watchQuery': {
+      'fetchPolicy': 'no-cache',
+      'errorPolicy': 'ignore',
+    },
+    'query': {
+      'fetchPolicy': 'no-cache',
+      'errorPolicy': 'all',
+    },
+  },
 });

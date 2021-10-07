@@ -1,11 +1,13 @@
 import Vue from "vue";
 import VueApollo from "vue-apollo";
 
-import gitClient from './../js/api_git'
+import gitClient from "./api/api_git"
+import youtrackClient from "./api/api_youtrack"
 
 const apolloProvider = new VueApollo({
   clients: {
-    gitClient: gitClient
+    gitClient: gitClient,
+    youtrackClient: youtrackClient
   }
 });
 

@@ -1,35 +1,53 @@
 import {HttpLink} from "apollo-link-http";
-import ApolloClient from "apollo-client";
+import {DefaultOptions, ApolloClient} from "apollo-client";
 import {InMemoryCache} from "apollo-cache-inmemory";
-import { ApolloLink, concat, split } from 'apollo-link';
-import { setContext } from "apollo-link-context";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import {ApolloLink} from 'apollo-link';
 
 const youtrackLink = new HttpLink({
-  uri    : 'https://tomcoupe.myjetbrains.com/youtrack/api/issues?fields=id,summary,project(name)&project=CCL0001',
-  fetch,
-  headers: {authorization: `Bearer ${process.env.YOUTRACK_TOKEN}`},
+  uri: 'https://davetest1271.myjetbrains.com/youtrack/api/issues?fields=id,summary,project(name)&project=DEMO',
+  customFetch,
+  headers: {
+    authorization: `Bearer perm:cm9vdA==.NDYtMA==.oIrEbsaEeryGiIYAdxlY3VzXj4g0iX`
+  },
   useGETForQueries: true,
 });
 
-const authMiddleware = new ApolloLink((operation, forward) => {
-  // add the authorization to the headers
+const contextLink = new ApolloLink((operation, forward) => {
+  // Called before operation is sent to server
   operation.setContext({
-      includeQuery: false,
+    http: {includeQuery: false},
   });
-  return forward(operation);
-})
 
-const client = new ApolloClient({
-  link          : authMiddleware,
-  cache         : new InMemoryCache({addTypename: true}),
-  fetchOptions: {mode: 'no-cors'},
-  defaultOptions: {
-    watchQuery: {fetchPolicy: "cache-and-network"}
-  },
-  http: {
-    includeQuery: false,
-  }
+  return forward(operation);
 });
 
-export default client;
+const customFetch = (uri, options) => {
+  return fetch(uri, {
+    headers: {
+      authorization: `Bearer perm:cm9vdA==.NDYtMA==.oIrEbsaEeryGiIYAdxlY3VzXj4g0iX`,
+    },
+    mode: 'no-cors'
+  });
+};
+
+const parseResponse = new ApolloLink((operation, forward) => {
+  return forward(operation).map((response) => {
+    response.data.parsed = transformData(response.data);
+    return response
+  })
+})
+
+function transformData (data) {
+  console.log('data', data);
+  return data;
+}
+
+
+export default new ApolloClient({
+  link: contextLink.concat(parseResponse).concat(youtrackLink),
+  cache: new InMemoryCache({addTypename: false}),
+  fetchOptions: {
+    mode: 'no-cors',
+  },
+});
+;
