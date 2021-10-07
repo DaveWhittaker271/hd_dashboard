@@ -8,6 +8,9 @@
         <Card title="Open Pull Requests">
           <OpenPullRequestsCardData />
         </Card>
+        <Card title="Outstanding Code Reviews">
+          <OutstandingReviewsCardData />
+        </Card>
       </CardContainer>
     </div>
   </div>
@@ -21,6 +24,7 @@ import SideBar from '../src/components/SideBar.vue'
 import NavBar from '../src/components/NavBar.vue'
 import Card from '../src/components/Card.vue'
 import OpenPullRequestsCardData from './components/OpenPullRequestsCardData.vue'
+import OutstandingReviewsCardData from './components/OutstandingReviewsCardData.vue'
 
 const CardContainer = styled.div`
   padding: 25px;
@@ -28,7 +32,7 @@ const CardContainer = styled.div`
 
 export default {
   name: 'App',
-  components: {NavBar, SvgComponent, SideBar, Card, CardContainer, OpenPullRequestsCardData},
+  components: {NavBar, SvgComponent, SideBar, Card, CardContainer, OpenPullRequestsCardData, OutstandingReviewsCardData},
   data() {
     return {}
   },

@@ -37,7 +37,7 @@ stack
   night mode
 
 
-
+ .graph-ql inspector action https://graphql-inspector.com/docs/products/action
 
 
 
