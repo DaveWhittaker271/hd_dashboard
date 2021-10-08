@@ -37,8 +37,12 @@
             <NotesCardData/>
           </Card>
 
-          <Card title="My Tasks" v-else-if="item.type === 'in-progress'">
+          <Card title="My Current Tasks" v-else-if="item.type === 'in-progress'">
             <InProgressTasksCardData />
+          </Card>
+
+          <Card title="My Failed Tasks" v-else-if="item.type === 'failed-tasks'">
+            <FailedTasksCardData />
           </Card>
 
         </GridItem>
@@ -60,6 +64,7 @@ import OpenPullRequestsCardData from './components/cards/OpenPullRequestsCardDat
 import OutstandingReviewsCardData from './components/cards/OutstandingReviewsCardData.vue'
 import InProgressTasksCardData from './components/cards/InProgressTasksCardData.vue'
 import NotesCardData from './components/cards/NotesCardData.vue'
+import FailedTasksCardData from './components/cards/FailedTasksCardData.vue'
 
 const Page = styled.div`
   background: rgb(254,228,228);
@@ -86,6 +91,7 @@ export default {
     OpenPullRequestsCardData,
     OutstandingReviewsCardData,
     InProgressTasksCardData,
+    FailedTasksCardData,
     NotesCardData,
     Header,
     GridLayout,
@@ -102,6 +108,7 @@ export default {
         {"x": 8, "y": 0, "w": 4, "h": 5, "minW": 2, "minH": 4, "type": "notes", "i": "3", static: false, resizable: true},
         {"x": 0, "y": 5, "w": 12, "h": 1, "type": "header", "text": "YouTrack", "i": "4", static: false, resizable: false},
         {"x": 0, "y": 5, "w": 4, "h": 5, "minW": 2, "minH": 4, "type": "in-progress", "i": "5", static: false, resizable: true},
+        {"x": 4, "y": 5, "w": 4, "h": 5, "minW": 2, "minH": 4, "type": "failed-tasks", "i": "6", static: false, resizable: true},
       ],
       draggable: true,
       resizable: true,
