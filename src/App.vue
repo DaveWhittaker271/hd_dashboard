@@ -16,7 +16,8 @@
           :margin="[10, 10]"
           :use-css-transforms="true"
       >
-        <GridItem v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i" :minW="item.minW" :minH="item.minH" :is-resizable="item.resizable">
+        <GridItem v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i" :minW="item.minW" :minH="item.minH" :is-resizable="item.resizable"
+                  drag-allow-from=".card-header">
           <Header v-if="item.type === 'header'">
             {{ item.text }}
           </Header>
@@ -33,7 +34,7 @@
             <NotesCardData/>
           </Card>
 
-          <Card title="In Progress Tasks" v-else-if="item.type === 'in-progress'">
+          <Card title="My Tasks" v-else-if="item.type === 'in-progress'">
             <InProgressTasksCardData />
           </Card>
 
@@ -96,9 +97,6 @@ export default {
       draggable: true,
       resizable: true,
     }
-  },
-  beforeMount()
-  {
   },
   methods: {
   }

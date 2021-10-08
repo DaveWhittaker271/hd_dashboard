@@ -2,12 +2,12 @@ import {HttpLink} from "apollo-link-http";
 import {DefaultOptions, ApolloClient} from "apollo-client";
 import {InMemoryCache} from "apollo-cache-inmemory";
 import {ApolloLink} from 'apollo-link';
+import Vue from "vue";
 
 const youtrackLink = new HttpLink({
-  uri: 'https://davetest1271.myjetbrains.com/youtrack/api/issues?fields=id,summary,project(name)&project=DEMO',
-  customFetch,
+  uri: 'https://davetest1271.myjetbrains.com/youtrack/api/issues?fields=id,idReadable,resolved,summary&project=DEMO&assignee=root',
   headers: {
-    authorization: `Bearer perm:cm9vdA==.NDYtMA==.oIrEbsaEeryGiIYAdxlY3VzXj4g0iX`
+    authorization: `Bearer perm:cm9vdA==.NDYtMA==.oIrEbsaEeryGiIYAdxlY3VzXj4g0iX`,
   },
   useGETForQueries: true,
 });
@@ -21,30 +21,25 @@ const contextLink = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
-const customFetch = (uri, options) => {
-  return fetch(uri, {
-    headers: {
-      authorization: `Bearer perm:cm9vdA==.NDYtMA==.oIrEbsaEeryGiIYAdxlY3VzXj4g0iX`,
-    },
-    mode: 'no-cors'
-  });
-};
-
 const parseResponse = new ApolloLink((operation, forward) => {
   return forward(operation).map((response) => {
-    response.data.parsed = transformData(response.data);
-    return response
+    console.log('response', response);
+    const data = transformData(response);
+    console.log('mapped data', data);
+    return data;
   })
 })
 
 function transformData (data) {
-  console.log('data', data);
-  return data;
+  data.map((issue) => {
+    Vue.delete(issue, '$type');
+  });
+
+  return {data: {inProgressTasks: { tasks: data}}};
 }
 
-
 export default new ApolloClient({
-  link: contextLink.concat(parseResponse).concat(youtrackLink),
+  link: ApolloLink.from([contextLink, parseResponse, youtrackLink]),
   cache: new InMemoryCache({addTypename: false}),
   fetchOptions: {
     mode: 'no-cors',

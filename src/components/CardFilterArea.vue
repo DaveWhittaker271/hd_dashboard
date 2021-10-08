@@ -1,17 +1,22 @@
 <template>
   <div>
-    <b-icon icon="gear-fill" v-b-toggle.collapse-filter1 />
-    <b-collapse id="collapse-filter1">
+    <b-icon icon="gear-fill" v-b-toggle.collapse-filter{{uuid}} />
+    <b-collapse id="collapse-filter{{uuid}}">
       <b-card></b-card>
     </b-collapse>
   </div>
 </template>
 <script>
+let uuid = 0;
 export default {
   name: 'CardFilterArea',
   components: {},
   props: [],
-}
+  beforeCreate() {
+    this.uuid = uuid.toString();
+    uuid += 1;
+  },
+};
 </script>
 <style lang="less" scoped>
   svg {
