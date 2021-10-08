@@ -1,8 +1,7 @@
 <template>
-  <div id="page">
+  <div id="page" >
     <SvgComponent/>
-    <NavBar/>
-    <div id="main">
+    <Page id="main">
       <SideBar/>
       <GridLayout
           :layout.sync="layout"
@@ -15,9 +14,13 @@
           :vertical-compact="true"
           :margin="[10, 10]"
           :use-css-transforms="true"
+          @layout-updated="layoutUpdatedEvent"
+          @contextmenu.prevent="$refs.menu.open"
       >
         <GridItem v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i" :minW="item.minW" :minH="item.minH" :is-resizable="item.resizable"
-                  drag-allow-from=".card-header">
+                  drag-allow-from=".card-header"
+                  @moved="layoutUpdatedEvent"
+                  @resized="layoutUpdatedEvent">
           <Header v-if="item.type === 'header'">
             {{ item.text }}
           </Header>
@@ -40,7 +43,7 @@
 
         </GridItem>
       </GridLayout>
-    </div>
+    </Page>
   </div>
 </template>
 
@@ -56,7 +59,12 @@ import Card from '../src/components/Card.vue'
 import OpenPullRequestsCardData from './components/cards/OpenPullRequestsCardData.vue'
 import OutstandingReviewsCardData from './components/cards/OutstandingReviewsCardData.vue'
 import InProgressTasksCardData from './components/cards/InProgressTasksCardData.vue'
-import NotesCardData from './components/NotesCardData.vue'
+import NotesCardData from './components/cards/NotesCardData.vue'
+
+const Page = styled.div`
+  background: rgb(254,228,228);
+  background: linear-gradient(344deg, rgba(254,228,228,1) 0%, rgba(255,255,255,1) 100%);
+`;
 
 const CardContainer = styled.div`
   padding: 25px;
@@ -81,7 +89,8 @@ export default {
     NotesCardData,
     Header,
     GridLayout,
-    GridItem
+    GridItem,
+    Page
   },
   data()
   {
@@ -99,6 +108,21 @@ export default {
     }
   },
   methods: {
+    layoutUpdatedEvent: function(newLayout){
+      this.layout = newLayout;
+    }
+  },
+  mounted() {
+      const layout = localStorage.getItem('layout');
+      if (layout === null || layout === undefined) {
+        return;
+      }
+      this.layout = JSON.parse(layout);
+  },
+  watch: {
+    layout(newLayout) {
+      localStorage.setItem('layout', JSON.stringify(newLayout));
+    }
   }
 }
 </script>

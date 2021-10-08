@@ -8,6 +8,14 @@ query inProgressTasks {
       idReadable,
       summary,
       resolved
+      project {
+        iconUrl,
+        shortName
+      }
+      customFields {
+        name,
+        value
+      }
     }
   }
 }

@@ -15,7 +15,10 @@
     <b-nav-item>
       <b-icon icon="bar-chart-fill" />
     </b-nav-item>
-    <b-nav-item>
+    <b-nav-item class="bottom">
+      <b-icon icon="gear-fill" />
+    </b-nav-item>
+    <b-nav-item class="bottom">
       <b-icon icon="gear-fill" />
     </b-nav-item>
   </b-nav>
@@ -27,8 +30,12 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+  .bottom {
+    position:absolute;
+    bottom: 0px;
+  }
   ul {
-    background: @primaryLight2;
+    background: @primary;
 
     li {
       display: block;
@@ -52,7 +59,7 @@ export default {
 
         &:hover {
           color: @navbarLinkColorHover;
-          background-color: @primary;
+          background-color: @primaryLight2;
         }
 
         svg {

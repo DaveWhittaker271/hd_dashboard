@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-icon icon="gear-fill" v-b-toggle.collapse-filter{{uuid}} />
-    <b-collapse id="collapse-filter{{uuid}}">
+    <b-icon icon="gear-fill" v-b-toggle="'collapse-filter' + uuid" />
+    <b-collapse :id="'collapse-filter' + uuid">
       <b-card></b-card>
     </b-collapse>
   </div>
@@ -17,6 +17,26 @@ export default {
     uuid += 1;
   },
 };
+
+import Vue from 'vue';
+
+Vue.use((Vue) => {
+  // Assign a unique id to each component
+  let uuid = 0;
+  Vue.mixin({
+    beforeCreate: function() {
+      this.uuid = uuid.toString();
+      uuid += 1;
+    },
+  });
+
+  // Generate a component-scoped id
+  Vue.prototype.$id = function(id) {
+    return "uid-" + this.uuid + "-" + id;
+  };
+});
+
+
 </script>
 <style lang="less" scoped>
   svg {
